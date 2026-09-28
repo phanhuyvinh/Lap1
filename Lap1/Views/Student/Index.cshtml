@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/MyLayoutHelper.cshtml";
+}
+@model IEnumerable<Student>
+@* HTML thuần *@
+@* <a href="/Admin/Student/Add" class="btn btn-primary">Create Student</a> *@
+@* asp-action *@
+@* <a asp-controller="Student" asp-action="Create" class="btn btn-primary">Create Student</a> *@
+@* asp-route *@
+@* <a asp-route="StudentAdd" class="btn btn-primary">Create Student</a> *@
+<a asp-action="Create" class="btn btn-primary">Create Student</a> @*thay thế theo nhiều cách khác nhau ở trên*@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Ảnh đại diện</th>
+            <th>Họ tên</th>
+            <th>Ngày sinh</th>
+            <th>Ngành</th>
+            <th>Giới tính</th>
+            <th>Hệ ĐT</th>
+            <th>Địa chỉ</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var s in Model)
+        {
+            <tr>
+                <td>@s.Id</td>
+                <!-- Hiển thị ảnh đại diện -->
+                <td>
+                    @if (!string.IsNullOrEmpty(s.AvatarUrl))
+                    {
+                        <img src="@s.AvatarUrl" alt="Avatar" width="50" height="50" style="object-fit:cover; border-radius: 5px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có ảnh</span>
+                    }
+                </td>
+                <td>@s.Name</td>
+                <td>@s.DateOfBorth</td>
+                @{
+                    string str = "";
+                    switch (s.Branch)
+                    {
+                        case Branch.IT:
+                            str="CNTT";
+                            break;
+                        case Branch.BE:
+                            str="Kinh tế";
+                            break;
+                        case Branch.CE:
+                            str = "Công trình";
+                            break;
+                        case Branch.EE:
+                            str = "Điện - Điện tử";
+                            break;
+                    }
+                }
+            <td>@str</td>
+            <td>@(s.Gender==Gender. Male? "Nam": "Nữ")</td>
+            <td>@(s.IsRegular ? "Chính quy": "Phi chính quy")</td>
+            <td>@s.Address</td>
+            <td>@s.Email</td>
+        </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        var table = document.querySelector("table");
+        table.onclick = function onTableClick() {
+            table.style = "background-color: yellow;";
+        }
+    </script>
+}
