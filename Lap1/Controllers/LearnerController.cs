@@ -18,14 +18,31 @@ namespace Lap1.Controllers
         }
 
         // BƯỚC 8.1: HIỂN THỊ DANH SÁCH
-        public IActionResult Index()
+        public IActionResult Index(int? mid)
         {
-            var learners = db.Learners.Include(m => m.Major).ToList();
-            //**ToList() * *: Kích hoạt câu lệnh `SELECT` nạp toàn bộ
-            //danh sách bản ghi từ bảng SQL Server về dưới dạng `List
-            return View(learners);
+            if (mid == null)
+            {
+                var learners = db.Learners.Include(m => m.Major).ToList();
+                //**ToList() * *: Kích hoạt câu lệnh `SELECT` nạp toàn bộ
+                //danh sách bản ghi từ bảng SQL Server về dưới dạng `List
+                return View(learners);
+            }
+            else
+            {
+                var learners = db.Learners
+                    .Where(l => l.MajorID == mid)
+                    .Include(m => m.Major).ToList();
+                return View(learners);
+            }
+            
         }
-
+        public IActionResult LearnerByMajorID(int mid)
+        {
+            var learners = db.Learners
+                .Where(l => l.MajorID == mid)
+                .Include(m => m.Major).ToList();
+            return PartialView("LearnerTable", learners);
+        }
         // BƯỚC 8.2: THÊM MỚI (CREATE)
         public IActionResult Create()
         {

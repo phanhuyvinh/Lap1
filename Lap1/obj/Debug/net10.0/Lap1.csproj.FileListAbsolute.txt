@@ -226,3 +226,4 @@ G:\0code\laptrinhweb\Lap1\Lap1\obj\Debug\net10.0\refint\Lap1.dll
 G:\0code\laptrinhweb\Lap1\Lap1\obj\Debug\net10.0\Lap1.pdb
 G:\0code\laptrinhweb\Lap1\Lap1\obj\Debug\net10.0\Lap1.genruntimeconfig.cache
 G:\0code\laptrinhweb\Lap1\Lap1\obj\Debug\net10.0\ref\Lap1.dll
+G:\0code\laptrinhweb\Lap1\Lap1\obj\Debug\net10.0\Lap1.sourcelink.json
